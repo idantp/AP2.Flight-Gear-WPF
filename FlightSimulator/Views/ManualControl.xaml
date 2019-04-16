@@ -4,10 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlightSimulator.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <local:Joystick></local:Joystick>
+             mc:Ignorable="d"
+             d:DesignHeight="500" d:DesignWidth="500">
+    
+    <Grid TextBlock.FontSize="21" TextBlock.FontWeight="DemiBold" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="← THROTTLE →" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5">
+        <TextBlock.LayoutTransform>
+            <RotateTransform Angle="+90"/>
+        </TextBlock.LayoutTransform>
+        </TextBlock>
+        <TextBlock Text="← ELEVATOR →" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" Margin="5">
+            <TextBlock.LayoutTransform>
+                <RotateTransform Angle="+90"/>
+            </TextBlock.LayoutTransform>
+        </TextBlock>
+        <TextBlock Text="← RUDDER →" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" Margin="5"></TextBlock>
+        <TextBlock Text="← AILERON →" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" Margin="5"></TextBlock>
+        <local:Joystick x:Name="JoyStick" Grid.Row="1" Grid.Column="2"></local:Joystick>
+        <Slider x:Name="rudderSlider" Height="20" Width="300" Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Minimum="-1" Maximum="1" TickPlacement="BottomRight"></Slider>
+        <Slider x:Name="throttleSlider" Height="300" Width="20" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Vertical" Minimum="-1" Maximum="1">
+        </Slider>
+
+        <TextBlock Text="{Binding ElementName=throttleSlider, Path=Value, StringFormat=0.##}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock Text="{Binding ElementName=rudderSlider, Path=Value, StringFormat=0.##}" Margin="10" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Text="{Binding ElementName=JoyStick, Path=Aileron, StringFormat= 0.0#}" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="8"></TextBlock>
+        <TextBlock Text="{Binding ElementName=JoyStick, Path=Elevator, StringFormat= 0.0#}" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8">
+            <TextBlock.LayoutTransform>
+                <RotateTransform Angle="+90"/>
+            </TextBlock.LayoutTransform>
+        </TextBlock>
+        
             
     </Grid>
 </UserControl>
