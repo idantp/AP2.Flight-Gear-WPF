@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FlightSimulator.ViewModels;
+using FlightSimulator.Model;
 
 namespace FlightSimulator.Model
 {
@@ -11,7 +12,8 @@ namespace FlightSimulator.Model
     {
 
         public ManualControlModel() {
-            //TODO - INFO
+            Info.ServerInstance.PorpertyChanged += Instance_PropertyChanged();
+            
         }
     }
 }
