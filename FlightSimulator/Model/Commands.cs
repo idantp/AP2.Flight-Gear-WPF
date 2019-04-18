@@ -52,7 +52,7 @@ namespace FlightSimulator.Model
                     {
                         writer.Write(cmd);
                     }
-                    //System.Threading.Thread.Sleep(2000);
+                    System.Threading.Thread.Sleep(2000);
                 }
             }
             return;

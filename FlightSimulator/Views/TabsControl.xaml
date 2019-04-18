@@ -10,7 +10,11 @@
         <TabControl>
             <TabItem Header="Manual">
                 <Grid>
-                    <local:ManualControl></local:ManualControl>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="89*"/>
+                        <ColumnDefinition Width="405*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:ManualControl Grid.ColumnSpan="2"></local:ManualControl>
                 </Grid>
             </TabItem>
             <TabItem Header="Auto Pilot">

@@ -18,7 +18,8 @@
         </Grid.RowDefinitions>
         <Label Content="Flight Simulator" FontSize="28" FontWeight="DemiBold" HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
         <viewWindows:RouteBoard Grid.Row="1"></viewWindows:RouteBoard>
-        <viewWindows:ManualControl Grid.Column="1" Grid.Row="1"></viewWindows:ManualControl>
+       
+        <viewWindows:TabsControl Grid.Column="1" Grid.Row="1"></viewWindows:TabsControl>
         
     </Grid>
 </Window>
