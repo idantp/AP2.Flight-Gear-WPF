@@ -12,9 +12,6 @@ namespace FlightSimulator.ViewModels
 {
     class RouteBoardViewModel: BaseNotify
     {
-
-
-        
         private ICommand settingsCommand;
         public ICommand SettingsCommand {
             get {
@@ -34,8 +31,10 @@ namespace FlightSimulator.ViewModels
                 return connectCommand ?? (connectCommand = new CommandHandler(() => OnConnect()));
             }
         }
+
         private void OnConnect() {
-            Commands.CommandsInstance.openClientThread();
+            new Thread(() => { Info.ServerInstance.connectAsServer(); Commands.CommandsInstance.openClientThread(); }).Start();
+            
         }
     }
 }

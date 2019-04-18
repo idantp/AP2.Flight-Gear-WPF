@@ -4,20 +4,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlightSimulator.Model;
 
 namespace FlightSimulator.ViewModels
 {
     public class FlightBoardViewModel : BaseNotify
     {
-
-        public double Lon
-        {
-            get;
+        private FlightBoardModel flightBoardModel;
+        public FlightBoardViewModel() {
+            flightBoardModel = new FlightBoardModel();
+            flightBoardModel.PropertyChanged += PropertyChangedReached;
         }
 
-        public double Lat
+        private void PropertyChangedReached(object sender, System.ComponentModel.PropertyChangedEventArgs ev)
         {
-            get;
+            NotifyPropertyChanged(ev.PropertyName);
+        }
+
+        public Nullable<float> Lon
+        {
+            get {
+                return flightBoardModel.Lon;
+            }
+            set { }
+        }
+
+        public Nullable<float> Lat
+        {
+            get {
+                return flightBoardModel.Lat;
+            }
+            set { }
         }
     }
 }

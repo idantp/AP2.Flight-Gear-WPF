@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace FlightSimulator.Model
 {
-    class Info
+    class Info : BaseNotify
     {
         private double throttle;
         private double rudder;
@@ -61,7 +61,7 @@ namespace FlightSimulator.Model
                 NotifyPropertyChanged("Rudder");
             }
         }
-        public Nullable<float> Longtitude
+        public Nullable<float> Lon
         {
             get
             {
@@ -70,10 +70,10 @@ namespace FlightSimulator.Model
             set
             {
                 this.longtitude = value;
-                NotifyPropertyChanged("Longtitude");
+                NotifyPropertyChanged("Lon");
             }
         }
-        public Nullable<float> Latitude
+        public Nullable<float> Lat
         {
             get
             {
@@ -82,7 +82,7 @@ namespace FlightSimulator.Model
             set
             {
                 this.longtitude = value;
-                NotifyPropertyChanged("Latitude");
+                NotifyPropertyChanged("Lat");
             }
         }
 
@@ -108,7 +108,7 @@ namespace FlightSimulator.Model
                 while (run) {
                     string line = "";
                     char c;
-                    while (c = reader.ReadChar() != '\n')
+                    while ((c = reader.ReadChar()) != '\n')
                     {
                         line += c;
                     }
@@ -116,9 +116,9 @@ namespace FlightSimulator.Model
                         closeServer();
                         break;
                     }
-                    string[] values = line.Split(",");
-                    Latitude = float.Parse(values[1]);
-                    Longtitude = float.Parse(values[0]);
+                    string[] values = line.Split(',');
+                    Lat = float.Parse(values[1]);
+                    Lon = float.Parse(values[0]);
                     Rudder = double.Parse(values[21]);
                     Throttle = double.Parse(values[23]);
                     

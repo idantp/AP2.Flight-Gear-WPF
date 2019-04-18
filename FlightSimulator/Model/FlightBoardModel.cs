@@ -1,36 +1,38 @@
-﻿using FlightSimulator.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlightSimulator.Views;
+using FlightSimulator.ViewModels;
 
 namespace FlightSimulator.Model
 {
-    class ManualControlModel : BaseNotify
+    class FlightBoardModel : BaseNotify
     {
-
-        public ManualControlModel() {
+        public FlightBoardModel() {
             Info.ServerInstance.PropertyChanged += PropertyChangedReached;
         }
+
         private void PropertyChangedReached(object sender, System.ComponentModel.PropertyChangedEventArgs ev)
         {
             NotifyPropertyChanged(ev.PropertyName);
         }
-        public double Rudder
+
+        public Nullable<float> Lon
         {
-            get
-            {
-                return Info.ServerInstance.Rudder;
-            }
-            set { }
-        }
-        public double Throttle {
             get {
-                return Info.ServerInstance.Throttle;
+                return Info.ServerInstance.Lon;
             }
             set { }
         }
-      
+
+        public Nullable<float> Lat
+        {
+            get {
+                return Info.ServerInstance.Lat;
+            }
+            set { }
+        }
     }
 }

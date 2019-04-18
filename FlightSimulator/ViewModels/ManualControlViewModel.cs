@@ -5,50 +5,55 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FlightSimulator.ViewModels;
+using FlightSimulator.Model;
 
 namespace FlightSimulator.ViewModels
 {
     class ManualControlViewModel : BaseNotify
     {
-        private string rudder, elevator, aileron, throttle;
-
+        private ManualControlModel controlModel;
 
         public ManualControlViewModel()
         {
+            controlModel = new ManualControlModel();
+            controlModel.PropertyChanged += PropertyChangedReached;
+        }
 
-            rudder = "set /controls/flight/rudder ";
-            elevator = "set /controls/flight/elevator ";
-            aileron = "set /controls/flight/aileron ";
-            throttle = "set /controls/engines/current-engine/throttle ";
+        private void PropertyChangedReached(object sender, System.ComponentModel.PropertyChangedEventArgs ev)
+        {
+            NotifyPropertyChanged(ev.PropertyName);
         }
 
         public double Rudder
         {
-            set
-            {
-                new Thread(() => Commands.CommandsInstance.sendCommands
-
-            }
             get
             {
+                return controlModel.Rudder;
+                
+            }
+            set
+            {
+                new Thread(() => Commands.CommandsInstance.sendCommands("set /controls/flight/rudder " + value.ToString())).Start();
             }
         }
+
         public double Throttle
         {
-            set
-            {
-            }
             get
             {
+                return controlModel.Throttle;
             }
+            set
+            {
+                new Thread(() => Commands.CommandsInstance.sendCommands("set /controls/engines/current-engine/throttle " + value.ToString())).Start();
+            }
+            
         }
         public double Aileron
         {
             set
             {
-            }
-            get
-            {
+                new Thread(() => Commands.CommandsInstance.sendCommands("set /controls/flight/aileron " + value.ToString())).Start();
             }
         }
 
@@ -56,9 +61,7 @@ namespace FlightSimulator.ViewModels
         {
             set
             {
-            }
-            get
-            {
+                new Thread(() => Commands.CommandsInstance.sendCommands("set /controls/flight/elevator " + value.ToString())).Start();
             }
         }
     }

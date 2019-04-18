@@ -49,7 +49,7 @@ namespace FlightSimulator.Model
 
         public void sendCommands(string commands)
         {
-            if (client.Connected)
+            if (client != null && client.Connected)
             {
                 int i;
                 string[] separatedCommands = commands.Split('\n');
