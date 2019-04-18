@@ -6,23 +6,28 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.ViewModels
 {
-    class ManualControlViewModel: BaseNotify
+    class ManualControlViewModel : BaseNotify
     {
         private string rudder, elevator, aileron, throttle;
 
 
-        public ManualControlViewModel() {
-            
+        public ManualControlViewModel()
+        {
+
             rudder = "set /controls/flight/rudder ";
             elevator = "set /controls/flight/elevator ";
             aileron = "set /controls/flight/aileron ";
             throttle = "set /controls/engines/current-engine/throttle ";
         }
 
-        public double Rudder {
-            set {
+        public double Rudder
+        {
+            set
+            {
+
             }
-            get {
+            get
+            {
             }
         }
         public double Throttle
@@ -43,14 +48,15 @@ namespace FlightSimulator.ViewModels
             {
             }
         }
-    }
-    public double Elevator
-    {
-        set
+
+        public double Elevator
         {
-        }
-        get
-        {
+            set
+            {
+            }
+            get
+            {
+            }
         }
     }
 }
