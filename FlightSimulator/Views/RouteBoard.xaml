@@ -16,7 +16,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button Content="Connect" Grid.Column="0" Grid.Row="0" Width="100" Height="30"></Button>
-        <Button Content="Settings" Grid.Column="1" Grid.Row="0" Width="100" Height="30"></Button>
+        <Button x:Name="SettingsButton" Content="Settings" Grid.Column="1" Grid.Row="0" Width="100" Height="30" Command="{Binding SettingsCommand}"></Button>
         <local:FlightBoard Grid.Row="1" Grid.ColumnSpan="2"  Loaded="FlightBoard_Loaded"></local:FlightBoard>
     </Grid>
 </UserControl>

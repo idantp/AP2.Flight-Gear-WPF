@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBox BorderBrush="Blue" AcceptsReturn="True" Width="500" Height="430" Grid.ColumnSpan="2" Background="{Binding BackgroundColor, UpdateSourceTrigger=PropertyChanged}" Text="{Binding InputString, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-        <Button Content="OK" Grid.Column="0" Grid.Row="1" Width="100" Height="40" HorizontalAlignment="Right" Margin="15"></Button>
+        <Button Content="OK" Grid.Column="0" Grid.Row="1" Width="100" Height="40" HorizontalAlignment="Right" Margin="15" Command="{Binding OkCommand}"></Button>
         <Button Content="Clear" Grid.Column="1" Grid.Row="1" Width="100" Height="40" HorizontalAlignment="Left" Margin="15" Command="{Binding ClearCommand}"></Button>
     </Grid>
 </UserControl>

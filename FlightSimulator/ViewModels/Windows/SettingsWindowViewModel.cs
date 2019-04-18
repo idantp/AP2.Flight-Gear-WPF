@@ -1,4 +1,5 @@
 ﻿using FlightSimulator.Model;
+using FlightSimulator.Views.Windows;
 using FlightSimulator.Model.Interface;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace FlightSimulator.ViewModels.Windows
     public class SettingsWindowViewModel : BaseNotify
     {
         private ISettingsModel model;
+        private SettingsWin settingsWindow;
 
-        public SettingsWindowViewModel(ISettingsModel model)
+        public SettingsWindowViewModel(ISettingsModel model, SettingsWin settingsWin)
         {
             this.model = model;
+            this.settingsWindow = settingsWin;
         }
 
         public string FlightServerIP
@@ -74,6 +77,7 @@ namespace FlightSimulator.ViewModels.Windows
         private void OnClick()
         {
             model.SaveSettings();
+            this.settingsWindow.Close();
         }
         #endregion
 
@@ -89,6 +93,8 @@ namespace FlightSimulator.ViewModels.Windows
         private void OnCancel()
         {
             model.ReloadSettings();
+            this.settingsWindow.Close();
+            
         }
         #endregion
         #endregion

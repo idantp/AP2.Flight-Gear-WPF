@@ -5,14 +5,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FlightSimulator.Model;
+using System.Threading;
+using FlightSimulator.Views;
+
 
 
 namespace FlightSimulator.ViewModels
 {
     class AutoPilotViewModel : BaseNotify{
+
+        public Commands mCommands;
         private string inputString = "";
         private ICommand clearCommand = null;
         private ICommand okCommand;
+
+        public AutoPilotViewModel() {
+            this.mCommands = Commands.CommandsInstance;
+        }
+
         public String BackgroundColor {
             get
             {
@@ -59,6 +69,8 @@ namespace FlightSimulator.ViewModels
         {
             string temp = this.inputString;
             inputString = "";
+            new Thread(() => mCommands.sendCommands(temp)).Start();
+
         }
 
         private void clearClicked()
@@ -66,6 +78,5 @@ namespace FlightSimulator.ViewModels
             InputString = "";
             NotifyPropertyChanged("InputString");
         }
-
     }
 }

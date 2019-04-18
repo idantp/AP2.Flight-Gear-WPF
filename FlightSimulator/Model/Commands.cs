@@ -14,8 +14,20 @@ namespace FlightSimulator.Model
     {
         private TcpClient client;
         private NetworkStream stream;
+        private static Commands commandsInstance = null;
 
         public Commands() { }
+
+        //Singleton
+        public static Commands CommandsInstance {
+            get {
+                if (commandsInstance == null) {
+                    commandsInstance = new Commands();
+                }
+                return commandsInstance;
+            }
+           
+        }
 
         public void connect(string ip, int portNumber)
         {
@@ -35,7 +47,7 @@ namespace FlightSimulator.Model
                 connect(ApplicationSettingsModel.Instance.FlightServerIP, ApplicationSettingsModel.Instance.FlightCommandPort);}).Start();
         }
 
-        public void commandsSetter(string commands)
+        public void sendCommands(string commands)
         {
             if (client.Connected)
             {
@@ -52,7 +64,7 @@ namespace FlightSimulator.Model
                     {
                         writer.Write(cmd);
                     }
-                    System.Threading.Thread.Sleep(2000);
+                    Thread.Sleep(2000);
                 }
             }
             return;
