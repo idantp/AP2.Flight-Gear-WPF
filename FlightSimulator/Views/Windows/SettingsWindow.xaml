@@ -20,9 +20,9 @@
         <Label x:Name="serverIp" Content="Flight Server IP:" ></Label>
         <Label x:Name="infoPort" Content="Flight Info Port:" Grid.Row="1"></Label>
         <Label x:Name="commandPort" Content="Flight Command Port:" Grid.Row="2"></Label>
-        <TextBox BorderBrush="Black" Width="140" Height="25" Grid.Column="1"  ></TextBox>
-        <TextBox BorderBrush="Black" Width="140" Height="25" Grid.Row="1" Grid.Column="1"></TextBox>
-        <TextBox BorderBrush="Black" Width="140" Height="25" Grid.Row="2" Grid.Column="1"></TextBox>
+        <TextBox BorderBrush="Black" Width="140" Height="25" Grid.Column="1" Text="{Binding FlightServerIP}"></TextBox>
+        <TextBox BorderBrush="Black" Width="140" Height="25" Grid.Row="1" Grid.Column="1" Text="{Binding FlightInfoPort}"></TextBox>
+        <TextBox BorderBrush="Black" Width="140" Height="25" Grid.Row="2" Grid.Column="1" Text="{Binding FlightCommandPort}"></TextBox>
         <Button x:Name="okButton" Content="OK" Height="30" Width="50" Grid.Row="3" VerticalAlignment="Top" Margin="15" HorizontalAlignment="Right" Command="{Binding ClickCommand}"></Button>
         <Button x:Name="cancelButton" Content="Cancel" Height="30" Width="50" Grid.Column="1" Grid.Row="3" VerticalAlignment="Top" Margin="15" HorizontalAlignment="Left" Command="{Binding CancelCommand}"></Button>
 
