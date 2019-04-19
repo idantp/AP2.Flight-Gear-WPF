@@ -26,10 +26,5 @@ namespace FlightSimulator.Views
             InitializeComponent();
             DataContext = new ManualControlViewModel();
         }
-
-        private void Joystick_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

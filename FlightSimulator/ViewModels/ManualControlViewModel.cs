@@ -33,7 +33,9 @@ namespace FlightSimulator.ViewModels
             }
             set
             {
-                new Thread(() => Commands.CommandsInstance.sendCommands("set /controls/flight/rudder " + value.ToString())).Start();
+                String temp = "set /controls/flight/rudder ";
+                temp += value.ToString();
+                new Thread(() => Commands.CommandsInstance.sendCommands(temp)).Start();
             }
         }
 
@@ -45,7 +47,9 @@ namespace FlightSimulator.ViewModels
             }
             set
             {
-                new Thread(() => Commands.CommandsInstance.sendCommands("set /controls/engines/current-engine/throttle " + value.ToString())).Start();
+                String temp = "set /controls/engines/current-engine/throttle ";
+                temp += value.ToString();
+                new Thread(() => Commands.CommandsInstance.sendCommands(temp)).Start();
             }
             
         }
@@ -53,7 +57,9 @@ namespace FlightSimulator.ViewModels
         {
             set
             {
-                new Thread(() => Commands.CommandsInstance.sendCommands("set /controls/flight/aileron " + value.ToString())).Start();
+                String temp = "set /controls/flight/aileron ";
+                temp += value.ToString();
+                new Thread(() => Commands.CommandsInstance.sendCommands(temp)).Start();
             }
         }
 
@@ -61,7 +67,9 @@ namespace FlightSimulator.ViewModels
         {
             set
             {
-                new Thread(() => Commands.CommandsInstance.sendCommands("set /controls/flight/elevator " + value.ToString())).Start();
+                String temp = "set /controls/flight/elevator ";
+                temp += value.ToString();
+                new Thread(() => Commands.CommandsInstance.sendCommands(temp)).Start();
             }
         }
     }

@@ -73,7 +73,6 @@ namespace FlightSimulator.Model
                     }
                 }
             }
-            return;
         }
     }
 }

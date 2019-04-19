@@ -25,14 +25,7 @@ namespace FlightSimulator.ViewModels
         public String BackgroundColor {
             get
             {
-                if (inputString == "")
-                {
-                    return "White";
-                }
-                else
-                {
-                    return "Salmon";
-                }
+                return inputString == "" ? "White" : "Salmon";
             }
         }
 
