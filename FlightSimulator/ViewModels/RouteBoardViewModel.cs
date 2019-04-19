@@ -33,7 +33,10 @@ namespace FlightSimulator.ViewModels
         }
 
         private void OnConnect() {
-            new Thread(() => { Info.ServerInstance.connectAsServer(); Commands.CommandsInstance.openClientThread(); }).Start();
+            new Thread(() => {
+                Info.ServerInstance.connectAsServer();
+                Commands.CommandsInstance.openClientThread();
+            }).Start();
             
         }
     }

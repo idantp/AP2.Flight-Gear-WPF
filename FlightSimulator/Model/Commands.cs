@@ -15,6 +15,7 @@ namespace FlightSimulator.Model
         private TcpClient client;
         private NetworkStream stream;
         private static Commands commandsInstance = null;
+        private bool isConnected = false;
 
         public Commands() { }
 
@@ -38,7 +39,8 @@ namespace FlightSimulator.Model
                 try { client.Connect(ep); }
                 catch (Exception) { }
             }
-            using (this.stream = client.GetStream()) { }
+            isConnected = true;
+            this.stream = client.GetStream();
         }
 
         public void openClientThread()
@@ -49,22 +51,26 @@ namespace FlightSimulator.Model
 
         public void sendCommands(string commands)
         {
-            if (client != null && client.Connected)
+            if (isConnected)
             {
-                int i;
-                string[] separatedCommands = commands.Split('\n');
-                for (i = 0; i < separatedCommands.Length; i++) {
-                    separatedCommands[i] += "\r\n";
-                }
-
-                foreach (string cmd in separatedCommands)
+                if (!string.IsNullOrEmpty(commands))
                 {
-                    //TODO make sure it works
-                    using (BinaryWriter writer = new BinaryWriter(this.stream))
+                    int i;
+                    string[] separatedCommands = commands.Split('\n');
+                    for (i = 0; i < separatedCommands.Length; i++)
                     {
-                        writer.Write(cmd);
+                        separatedCommands[i] += "\r\n";
                     }
-                    Thread.Sleep(2000);
+
+                    foreach (string cmd in separatedCommands)
+                    {
+                        //TODO make sure it works
+                        using (BinaryWriter writer = new BinaryWriter(this.stream))
+                        {
+                            writer.Write(cmd);
+                        }
+                        Thread.Sleep(2000);
+                    }
                 }
             }
             return;

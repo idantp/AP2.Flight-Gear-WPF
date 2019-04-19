@@ -15,12 +15,11 @@ namespace FlightSimulator.ViewModels
     class AutoPilotViewModel : BaseNotify{
 
         public Commands mCommands;
-        private string inputString = "";
-        private ICommand clearCommand = null;
-        private ICommand okCommand;
+        private string inputString;
 
         public AutoPilotViewModel() {
             this.mCommands = Commands.CommandsInstance;
+            this.inputString = "";
         }
 
         public String BackgroundColor {
@@ -49,13 +48,15 @@ namespace FlightSimulator.ViewModels
                 return this.inputString;
             }
         }
+        private ICommand clearCommand = null;
+
         public ICommand ClearCommand {
             get {
                 if(clearCommand != null) { return clearCommand; }
                 return clearCommand = new CommandHandler(()=>clearClicked());
             }
         }
-
+        private ICommand okCommand;
         public ICommand OkCommand
         {
             get
@@ -68,7 +69,7 @@ namespace FlightSimulator.ViewModels
         private void okClicked()
         {
             string temp = this.inputString;
-            inputString = "";
+            InputString = "";
             new Thread(() => mCommands.sendCommands(temp)).Start();
 
         }
