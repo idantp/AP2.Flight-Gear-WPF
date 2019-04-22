@@ -46,8 +46,6 @@ namespace FlightSimulator.ViewModels.Windows
             }
         }
 
-     
-
         public void SaveSettings()
         {
             model.SaveSettings();
@@ -68,6 +66,7 @@ namespace FlightSimulator.ViewModels.Windows
                 return _clickCommand ?? (_clickCommand = new CommandHandler(() => OnClick()));
             }
         }
+        // if "Save" button is clicked then save the fields in the window and close it
         private void OnClick()
         {
             model.SaveSettings();
@@ -84,6 +83,7 @@ namespace FlightSimulator.ViewModels.Windows
                 return _cancelCommand ?? (_cancelCommand = new CommandHandler(() => OnCancel()));
             }
         }
+        // if "Cancel" button is clicked then close the window with no changes
         private void OnCancel()
         {
             model.ReloadSettings();

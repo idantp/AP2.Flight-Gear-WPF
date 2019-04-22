@@ -15,6 +15,8 @@ namespace FlightSimulator.ViewModels
             this.inputString = "";
         }
 
+        // if the Auto-Pilot Text-Box is empty then paint background with White,
+        // otherwise paint it with Pink
         public String BackgroundColor {
             get
             {
