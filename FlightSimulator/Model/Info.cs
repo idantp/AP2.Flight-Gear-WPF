@@ -93,7 +93,7 @@ namespace FlightSimulator.Model
             tcpListener = new TcpListener(ep);
             tcpListener.Start();
             this.tcpClient = tcpListener.AcceptTcpClient();
-            new Thread(() => getFlightData(tcpListener, tcpClient)).Start();
+            new Thread(() => getFlightData()).Start();
         }
 
         public void closeServer() {
@@ -102,19 +102,23 @@ namespace FlightSimulator.Model
            
         }
 
-        public void getFlightData(TcpListener tcpListener, TcpClient tcpClient) {
+        public void getFlightData() {
+
+            //NetworkStream stream = this.tcpClient.GetStream();
+            //BinaryReader reader = new BinaryReader(stream);
+            //DateTime start = DateTime.UtcNow;
+
             using (NetworkStream stream = tcpClient.GetStream())
             using (BinaryReader reader = new BinaryReader(stream))
             {
-               
-                while (run) {
+
+                while (run){
                     string line = "";
                     char c;
-                    while ((c = reader.ReadChar()) != '\n')
-                    {
+                    while ((c = reader.ReadChar()) != '\n'){
                         line += c;
                     }
-                    if (line == "") {
+                    if (line == ""){
                         closeServer();
                         break;
                     }
@@ -123,7 +127,6 @@ namespace FlightSimulator.Model
                     Lon = float.Parse(values[0]);
                     Rudder = double.Parse(values[21]);
                     Throttle = double.Parse(values[23]);
-                    
                 }
             }
         }
