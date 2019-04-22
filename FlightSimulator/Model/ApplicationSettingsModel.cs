@@ -1,5 +1,4 @@
 ﻿using FlightSimulator.Model.Interface;
-// My Last Update !!!!
 namespace FlightSimulator.Model
 {
     public class ApplicationSettingsModel : ISettingsModel
