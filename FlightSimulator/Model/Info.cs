@@ -81,7 +81,7 @@ namespace FlightSimulator.Model
             }
             set
             {
-                this.longtitude = value;
+                this.latitude = value;
                 NotifyPropertyChanged("Lat");
             }
         }
