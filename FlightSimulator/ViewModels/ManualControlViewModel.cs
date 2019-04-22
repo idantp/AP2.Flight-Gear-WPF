@@ -19,6 +19,7 @@ namespace FlightSimulator.ViewModels
             NotifyPropertyChanged(ev.PropertyName);
         }
 
+        // Properties
         public double Rudder
         {
             get

@@ -54,6 +54,8 @@ namespace FlightSimulator.ViewModels
             }
         }
 
+        // if "OK" button is clicked then clear the Commands Text-Box, then
+        // apply the commands in the flight simulator.
         private void okClicked()
         {
             string temp = this.inputString;
@@ -61,7 +63,8 @@ namespace FlightSimulator.ViewModels
             new Thread(() => mCommands.sendCommands(temp)).Start();
 
         }
-
+        // if "Clear" button is clicked then clear the Commands Text-Box, then
+        // notify a change in the Text-Box content
         private void clearClicked()
         {
             InputString = "";
