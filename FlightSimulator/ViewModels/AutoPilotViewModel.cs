@@ -12,7 +12,6 @@ using FlightSimulator.Views;
 
 namespace FlightSimulator.ViewModels
 {
-    //Hello Idan, Is it me you're looking for?
     class AutoPilotViewModel : BaseNotify{
 
         public Commands mCommands;
