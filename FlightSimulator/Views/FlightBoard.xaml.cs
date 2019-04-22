@@ -46,8 +46,8 @@ namespace FlightSimulator.Views
 
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Nullable<float> y = (float)flightBoardVM.Lon;
-            Nullable<float> x = (float)flightBoardVM.Lat;
+            Nullable<float> y = flightBoardVM.Lon;
+            Nullable<float> x = flightBoardVM.Lat;
             if ((e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon")) && (x!= null && y!= null))
             {
                 Point p1 = new Point((float)x, (float)y);        

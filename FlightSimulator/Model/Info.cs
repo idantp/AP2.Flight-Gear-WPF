@@ -86,18 +86,20 @@ namespace FlightSimulator.Model
             }
         }
 
+        //done
         public void connectAsServer() {
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(Properties.Settings.Default.FlightServerIP),
                                                            Properties.Settings.Default.FlightInfoPort);
             tcpListener = new TcpListener(ep);
             tcpListener.Start();
-            tcpClient = tcpListener.AcceptTcpClient();
+            this.tcpClient = tcpListener.AcceptTcpClient();
             new Thread(() => getFlightData(tcpListener, tcpClient)).Start();
         }
 
         public void closeServer() {
             this.tcpClient.Close();
             this.tcpListener.Stop();
+           
         }
 
         public void getFlightData(TcpListener tcpListener, TcpClient tcpClient) {

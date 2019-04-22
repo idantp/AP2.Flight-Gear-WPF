@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
-using System.IO;
 using System.Threading;
 
 namespace FlightSimulator.Model
@@ -36,7 +32,9 @@ namespace FlightSimulator.Model
             this.client = new TcpClient();
             while (!client.Connected)
             {
-                try { client.Connect(ep); }
+                try {
+                    client.Connect(ep);
+                }
                 catch (Exception) { }
             }
             isConnected = true;
@@ -61,15 +59,14 @@ namespace FlightSimulator.Model
                     {
                         separatedCommands[i] += "\r\n";
                     }
-
-                    foreach (string cmd in separatedCommands)
+                    if (this.stream.CanWrite)
                     {
-                        //TODO make sure it works
-                        using (BinaryWriter writer = new BinaryWriter(this.stream))
+                        foreach (string cmd in separatedCommands)
                         {
-                            writer.Write(cmd);
+                            Byte[] bytesToWrite = Encoding.ASCII.GetBytes(cmd);
+                            stream.Write(bytesToWrite, 0, bytesToWrite.Length);
+                            Thread.Sleep(2000);
                         }
-                        Thread.Sleep(2000);
                     }
                 }
             }
