@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FlightSimulator.Model;
+﻿using FlightSimulator.Model;
 using FlightSimulator.Views.Windows;
 using System.Windows.Input;
 using System.Threading;
