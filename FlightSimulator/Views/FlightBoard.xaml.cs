@@ -40,7 +40,6 @@ namespace FlightSimulator.Views
             planeLocations = new ObservableDataSource<Point>();
             // Set identity mapping of point in collection to point on plot
             planeLocations.SetXYMapping(p => p);
-
             plotter.AddLineGraph(planeLocations, 2, "Route");
         }
 
@@ -48,7 +47,9 @@ namespace FlightSimulator.Views
         {
             Nullable<float> y = flightBoardVM.Lon;
             Nullable<float> x = flightBoardVM.Lat;
-            if ((e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon")) && (x!= null && y!= null))
+            // creating a new point that conssists of the current latitude and longitude
+            if ((e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon")) &&
+                (x!= null && y!= null))
             {
                 Point p1 = new Point((float)x, (float)y);        
                 planeLocations.AppendAsync(Dispatcher, p1);

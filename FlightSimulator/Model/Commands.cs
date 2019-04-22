@@ -26,6 +26,13 @@ namespace FlightSimulator.Model
            
         }
 
+        /*
+        * Function Name: connect
+        * Function Input: string ip, int portNumber
+        * Function Output: None
+        * Function Operatin: the function gets an IP Adress and a Port number and
+        *                    makes a client connection to the flight simlutaor(the server).
+        */
         public void connect(string ip, int portNumber)
         {
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ip), portNumber);
@@ -41,18 +48,33 @@ namespace FlightSimulator.Model
             this.stream = client.GetStream();
         }
 
+        /*
+        * Function Name: openClientThread
+        * Function Input: None
+        * Function Output: None
+        * Function Operatin: the function open a TCP client in a new thread.
+        */
         public void openClientThread()
         {
             new Thread(delegate () {
                 connect(ApplicationSettingsModel.Instance.FlightServerIP, ApplicationSettingsModel.Instance.FlightCommandPort);}).Start();
         }
 
+        /*
+        * Function Name: sendCommands
+        * Function Input: string commands
+        * Function Output: None
+        * Function Operatin: the function gets a commands instructions and sets them
+        *                    in the flight simulator.
+        */
         public void sendCommands(string commands)
         {
             if (isConnected)
             {
+                // if there are no commands, then return
                 if (!string.IsNullOrEmpty(commands))
                 {
+                    // for each command - replace Unix NewLine with Windows NewLine
                     int i;
                     string[] separatedCommands = commands.Split('\n');
                     for (i = 0; i < separatedCommands.Length; i++)
@@ -61,6 +83,7 @@ namespace FlightSimulator.Model
                     }
                     if (this.stream.CanWrite)
                     {
+                        // send any command that was found every 2 seconds
                         foreach (string cmd in separatedCommands)
                         {
                             Byte[] bytesToWrite = Encoding.ASCII.GetBytes(cmd);

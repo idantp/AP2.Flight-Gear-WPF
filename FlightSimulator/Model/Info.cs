@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FlightSimulator.Model;
 using FlightSimulator.ViewModels;
-using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-
 namespace FlightSimulator.Model
 {
     class Info : BaseNotify
@@ -23,7 +16,7 @@ namespace FlightSimulator.Model
         Nullable<float> longtitude = null;
         bool run;
 
-
+        //constructor
         private Info() {
             throttle = 0;
             rudder = 0;
@@ -85,43 +78,59 @@ namespace FlightSimulator.Model
                 NotifyPropertyChanged("Lat");
             }
         }
-
-        //done
+        /*
+         * Function Name: connectAsServer
+         * Function Input: None
+         * Function Output: None
+         * Function Operatin: the function opens a server from which it reads data
+         */
         public void connectAsServer() {
+            // TCP Server
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(Properties.Settings.Default.FlightServerIP),
                                                            Properties.Settings.Default.FlightInfoPort);
             tcpListener = new TcpListener(ep);
             tcpListener.Start();
             this.tcpClient = tcpListener.AcceptTcpClient();
+            // open new thread which reads command lines
             new Thread(() => getFlightData()).Start();
         }
 
+        /*
+         * Function Name: closeServer
+         * Function Input: none
+         * Function Output: none
+         * Function Operatin: the function close the server that this class stores
+         */
         public void closeServer() {
             this.tcpClient.Close();
             this.tcpListener.Stop();
            
         }
 
+        /*
+         * Function Name: getFlightData
+         * Function Input: none
+         * Function Output: none
+         * Function Operatin: the function reads the current data from the server,
+         *                    and parses it to latitude, longitude, rudder and throttle
+         */
         public void getFlightData() {
-
-            //NetworkStream stream = this.tcpClient.GetStream();
-            //BinaryReader reader = new BinaryReader(stream);
-            //DateTime start = DateTime.UtcNow;
-
             using (NetworkStream stream = tcpClient.GetStream())
             using (BinaryReader reader = new BinaryReader(stream))
             {
-
                 while (run){
+                    // stores command line from auto pilot mode
                     string line = "";
                     char c;
                     while ((c = reader.ReadChar()) != '\n'){
                         line += c;
                     }
+                    // if no command was found - return
                     if (line == ""){
                         closeServer();
                         break;
                     }
+                    //parsing longitude, latitude, rudder and throttle
                     string[] values = line.Split(',');
                     Lat = float.Parse(values[1]);
                     Lon = float.Parse(values[0]);
