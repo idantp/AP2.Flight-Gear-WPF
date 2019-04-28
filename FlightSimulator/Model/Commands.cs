@@ -12,8 +12,6 @@ namespace FlightSimulator.Model
         private NetworkStream stream;
         private static Commands commandsInstance = null;
         private bool isConnected = false;
-        private Thread connectThread = null;
-
         public Commands() { }
 
         //Singleton
@@ -25,6 +23,14 @@ namespace FlightSimulator.Model
                 return commandsInstance;
             }
            
+        }
+
+        public void disconnect(){
+            if (isConnected)
+            {
+                isConnected = false;
+                client.Close();
+            }
         }
 
         /*
@@ -57,9 +63,8 @@ namespace FlightSimulator.Model
         */
         public void openClientThread()
         {
-            connectThread = new Thread(delegate () {
-                connect(ApplicationSettingsModel.Instance.FlightServerIP, ApplicationSettingsModel.Instance.FlightCommandPort);});
-            connectThread.Start();
+            new Thread(delegate () {
+                connect(ApplicationSettingsModel.Instance.FlightServerIP, ApplicationSettingsModel.Instance.FlightCommandPort);}).Start();
         }
 
         /*

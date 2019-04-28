@@ -78,20 +78,22 @@ namespace FlightSimulator.Model
                 NotifyPropertyChanged("Lat");
             }
         }
-        /*
-         * Function Name: connectAsServer
-         * Function Input: None
-         * Function Output: None
-         * Function Operatin: the function opens a server from which it reads data
-         */
-        public void connectAsServer() {
+
+
+
+            /*
+             * Function Name: connectAsServer
+             * Function Input: None
+             * Function Output: None
+             * Function Operatin: the function opens a server from which it reads data
+             */
+            public void connectAsServer() {
             // TCP Server
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(Properties.Settings.Default.FlightServerIP),
                                                            Properties.Settings.Default.FlightInfoPort);
             tcpListener = new TcpListener(ep);
             tcpListener.Start();
             this.tcpClient = tcpListener.AcceptTcpClient();
-            // open ata()).Start();
         }
 
         /*
@@ -104,6 +106,11 @@ namespace FlightSimulator.Model
             this.tcpClient.Close();
             this.tcpListener.Stop();
            
+        }
+
+        public void disconnect()
+        {
+            run = false;
         }
 
         /*
@@ -126,7 +133,6 @@ namespace FlightSimulator.Model
                     }
                     // if no command was found - return
                     if (line == ""){
-                        closeServer();
                         break;
                     }
                     //parsing longitude, latitude, rudder and throttle
@@ -136,6 +142,7 @@ namespace FlightSimulator.Model
                     Rudder = double.Parse(values[21]);
                     Throttle = double.Parse(values[23]);
                 }
+                closeServer();
             }
         }
     }

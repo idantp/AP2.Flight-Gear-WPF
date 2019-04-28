@@ -9,6 +9,7 @@ namespace FlightSimulator.ViewModels
     {
         private ICommand settingsCommand;
         private ICommand connectCommand;
+        private ICommand disconnectCommand;
 
 
         // if "Settings" button is clicked then pop-up Settings Window
@@ -21,6 +22,20 @@ namespace FlightSimulator.ViewModels
         private void SettingsClicked() {
             SettingsWin settingWindow = new SettingsWin();
             settingWindow.ShowDialog();
+        }
+
+        public ICommand DisconnectCommand
+        {
+            get
+            {
+                return disconnectCommand ?? (disconnectCommand = new CommandHandler(() => DisconnectClicked()));
+            }
+        }
+
+        // TODO
+        private void DisconnectClicked() {
+            Commands.CommandsInstance.disconnect();
+            Info.ServerInstance.disconnect();
         }
 
         public ICommand ConnectCommand {
