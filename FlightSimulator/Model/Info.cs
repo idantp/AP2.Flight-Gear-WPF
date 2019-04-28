@@ -15,6 +15,8 @@ namespace FlightSimulator.Model
         private TcpClient tcpClient;
         Nullable<float> latitude = null;
         Nullable<float> longtitude = null;
+        int lonCounter = 0;
+        int latCounter = 0;
         bool run;
 
         //constructor
@@ -64,7 +66,16 @@ namespace FlightSimulator.Model
             set
             {
                 this.longtitude = value;
-                NotifyPropertyChanged("Lon");
+                //so that the first two values from the server don't count in the drawing.
+                if (lonCounter < 2)
+                {
+                    lonCounter++;
+                }
+                //only notify after sampling twice from the server.
+                else
+                {
+                    NotifyPropertyChanged("Lon");
+                }
             }
         }
         public Nullable<float> Lat
@@ -76,7 +87,16 @@ namespace FlightSimulator.Model
             set
             {
                 this.latitude = value;
-                NotifyPropertyChanged("Lat");
+                //so that the first two values from the server don't count in the drawing.
+                if (latCounter < 2)
+                {
+                    latCounter++;
+                }
+                //only notify after sampling twice from the server.
+                else
+                {
+                    NotifyPropertyChanged("Lat");
+                }
             }
         }
 
