@@ -32,7 +32,6 @@ namespace FlightSimulator.ViewModels
             }
         }
 
-        // TODO
         private void DisconnectClicked() {
             Commands.CommandsInstance.disconnect();
             Info.ServerInstance.disconnect();
