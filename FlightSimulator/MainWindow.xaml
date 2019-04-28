@@ -7,19 +7,19 @@
         xmlns:viewWindows="clr-namespace:FlightSimulator.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1000">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Label Content="Flight Simulator" FontSize="28" FontWeight="DemiBold" HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
-        <viewWindows:RouteBoard Grid.Row="1"></viewWindows:RouteBoard>
-       
-        <viewWindows:TabsControl Grid.Column="1" Grid.Row="1"></viewWindows:TabsControl>
-        
-    </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Flight Simulator" FontSize="28" FontWeight="DemiBold" HorizontalAlignment="Center" Grid.ColumnSpan="2"></Label>
+            <viewWindows:RouteBoard Grid.Row="1"></viewWindows:RouteBoard>
+
+            <viewWindows:TabsControl Grid.Column="1" Grid.Row="1"></viewWindows:TabsControl>
+
+        </Grid>
 </Window>
