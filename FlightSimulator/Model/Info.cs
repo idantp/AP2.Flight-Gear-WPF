@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 namespace FlightSimulator.Model
+
 {
     class Info : BaseNotify
     {
@@ -79,8 +80,6 @@ namespace FlightSimulator.Model
             }
         }
 
-
-
             /*
              * Function Name: connectAsServer
              * Function Input: None
@@ -94,6 +93,7 @@ namespace FlightSimulator.Model
             tcpListener = new TcpListener(ep);
             tcpListener.Start();
             this.tcpClient = tcpListener.AcceptTcpClient();
+            new Thread(() => getFlightData()).Start();
         }
 
         /*
@@ -133,6 +133,7 @@ namespace FlightSimulator.Model
                     }
                     // if no command was found - return
                     if (line == ""){
+                        closeServer();
                         break;
                     }
                     //parsing longitude, latitude, rudder and throttle
@@ -142,7 +143,6 @@ namespace FlightSimulator.Model
                     Rudder = double.Parse(values[21]);
                     Throttle = double.Parse(values[23]);
                 }
-                closeServer();
             }
         }
     }
