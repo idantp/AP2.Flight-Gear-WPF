@@ -12,6 +12,7 @@ namespace FlightSimulator.Model
         private NetworkStream stream;
         private static Commands commandsInstance = null;
         private bool isConnected = false;
+        private Thread connectThread = null;
 
         public Commands() { }
 
@@ -56,8 +57,9 @@ namespace FlightSimulator.Model
         */
         public void openClientThread()
         {
-            new Thread(delegate () {
-                connect(ApplicationSettingsModel.Instance.FlightServerIP, ApplicationSettingsModel.Instance.FlightCommandPort);}).Start();
+            connectThread = new Thread(delegate () {
+                connect(ApplicationSettingsModel.Instance.FlightServerIP, ApplicationSettingsModel.Instance.FlightCommandPort);});
+            connectThread.Start();
         }
 
         /*

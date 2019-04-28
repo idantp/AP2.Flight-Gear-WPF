@@ -91,8 +91,7 @@ namespace FlightSimulator.Model
             tcpListener = new TcpListener(ep);
             tcpListener.Start();
             this.tcpClient = tcpListener.AcceptTcpClient();
-            // open new thread which reads command lines
-            new Thread(() => getFlightData()).Start();
+            // open ata()).Start();
         }
 
         /*
