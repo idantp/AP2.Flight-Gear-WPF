@@ -133,7 +133,6 @@ namespace FlightSimulator.Model
                     }
                     // if no command was found - return
                     if (line == ""){
-                        closeServer();
                         break;
                     }
                     //parsing longitude, latitude, rudder and throttle
@@ -143,6 +142,7 @@ namespace FlightSimulator.Model
                     Rudder = double.Parse(values[21]);
                     Throttle = double.Parse(values[23]);
                 }
+                closeServer();
             }
         }
     }
